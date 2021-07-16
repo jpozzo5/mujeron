@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+<odoo>
+        <record id="sale_market_place_pivot" model="ir.ui.view">
+            <field name="name">sale.market.place.pivot</field>
+            <field name="model">sale.market.place</field>
+            <field name="arch" type="xml">
+                <pivot string="Market Place">
+                    <field name="name"/>
+                    <field name="create_date" type="measure"/>
+                </pivot>
+            </field>
+        </record>
+
+        <record id="sale_market_place_search" model="ir.ui.view">
+            <field name="name">sale.market.place.search</field>
+            <field name="model">sale.market.place</field>
+            <field name="arch" type="xml">
+              <search>
+              	<field name="name"/>
+              </search>
+            </field>
+        </record>
+
+        <record id="sale_market_place_tree" model="ir.ui.view">
+            <field name="name">sale.market.place.tree</field>
+            <field name="model">sale.market.place</field>
+            <field name="arch" type="xml">
+                <tree string="Market Place">
+                    <field name="name"/>
+                    <field name="partner_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="sale_market_place_form" model="ir.ui.view">
+            <field name="name">sale.market.place.form</field>
+            <field name="model">sale.market.place</field>
+            <field name="arch" type="xml">
+                <form string="Market Place">
+                    <!--<header>
+                        <button
+                            string="Confirm"
+                            type="object"
+                            name="action_confirm"
+                            class="oe_highlight"
+                            attrs="{'invisible':[('state','=','cancel')]}"/>
+                        <button
+                            string="Cancel"
+                            type="object"
+                            name="action_cancel"
+                            attrs="{'invisible':[('state','=','cancel')]}"/>
+                        <field name="state" widget="statusbar" options="{'clickable': '1', 'fold_field': 'fold'}" statusbar_visible="Abierto,Cerrado"/>
+
+                    </header>-->
+                    <sheet>
+		                    <div class="oe_button_box" name="button_box">
+                            <button name="toggle_active" invisible="0" type="object" class="oe_stat_button" icon="fa-archive">
+                                <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
+                            </button>
+                        </div>
+                        <div class="oe_title">
+                            <label for="name" class="" string="Nombre del Market Place" />
+                            <h1>
+                                <field name="name" readonly="False" />
+                            </h1>
+                        </div>
+                        
+                        <group>
+                            <field name="partner_id" readonly="False" />
+                        </group>
+                        
+                    </sheet>
+                    <!--<div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>-->
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="sale_market_place_action">
+            <field name="name">Market Place</field>
+            <field name="res_model">sale.market.place</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record model="ir.actions.act_window" id="sale_market_place_action_graph">
+            <field name="name">Market Place</field>
+            <field name="res_model">sale.market.place</field>
+            <field name="view_mode">pivot</field>
+        </record>
+
+        <menuitem id="menu_root" name="Market Place" sequence="10" groups="stock_extended.market_place_group_manager"/>
+        <menuitem id="sale_market_place_menu" name="Market Place" parent="menu_root" sequence="5" groups="stock_extended.market_place_group_manager"/>
+        <menuitem id="sale_market_place" name="Market Place" parent="sale_market_place_menu" action="sale_market_place_action" sequence="5" groups="stock_extended.market_place_group_manager"/>
+    
+</odoo>

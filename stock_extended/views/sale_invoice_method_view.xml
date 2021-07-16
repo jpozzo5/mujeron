@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<odoo>
+        <record id="sale_invoice_method_pivot" model="ir.ui.view">
+            <field name="name">sale.invoice.method.pivot</field>
+            <field name="model">sale.invoice.method</field>
+            <field name="arch" type="xml">
+                <pivot string="Metodos de Facturación">
+                    <field name="name"/>
+                    <field name="create_date" type="measure"/>
+                </pivot>
+            </field>
+        </record>
+
+        <record id="sale_invoice_method_search" model="ir.ui.view">
+            <field name="name">sale.invoice.method.search</field>
+            <field name="model">sale.invoice.method</field>
+            <field name="arch" type="xml">
+              <search>
+              	<field name="name"/>
+              </search>
+            </field>
+        </record>
+
+        <record id="sale_invoice_method_tree" model="ir.ui.view">
+            <field name="name">sale.invoice.method.tree</field>
+            <field name="model">sale.invoice.method</field>
+            <field name="arch" type="xml">
+                <tree string="Metodos de Facturación">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="sale_invoice_method_form" model="ir.ui.view">
+            <field name="name">sale.invoice.method.form</field>
+            <field name="model">sale.invoice.method</field>
+            <field name="arch" type="xml">
+                <form string="Metodos de Facturación">
+                    <!--<header>
+                        <button
+                            string="Confirm"
+                            type="object"
+                            name="action_confirm"
+                            class="oe_highlight"
+                            attrs="{'invisible':[('state','=','cancel')]}"/>
+                        <button
+                            string="Cancel"
+                            type="object"
+                            name="action_cancel"
+                            attrs="{'invisible':[('state','=','cancel')]}"/>
+                        <field name="state" widget="statusbar" options="{'clickable': '1', 'fold_field': 'fold'}" statusbar_visible="Abierto,Cerrado"/>
+
+                    </header>-->
+                    <sheet>
+		                    <div class="oe_button_box" name="button_box">
+                            <button name="toggle_active" invisible="0" type="object" class="oe_stat_button" icon="fa-archive">
+                                <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
+                            </button>
+                        </div>
+                        <div class="oe_title">
+                            <label for="name" class="" string="Nombre del Metodo de Facturación" />
+                            <h1>
+                                <field name="name" readonly="False" />
+                            </h1>
+                        </div>
+                        
+                    </sheet>
+                    <!--<div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>-->
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="sale_invoice_method_action">
+            <field name="name">Metodos de Facturación</field>
+            <field name="res_model">sale.invoice.method</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record model="ir.actions.act_window" id="sale_invoice_method_action_graph">
+            <field name="name">Metodos de Facturación</field>
+            <field name="res_model">sale.invoice.method</field>
+            <field name="view_mode">pivot</field>
+        </record>
+
+        <menuitem id="sale_invoice_method_menu" name="Metodos de Facturación" parent="menu_root" sequence="5" groups="stock_extended.market_place_group_manager"/>
+        <menuitem id="sale_invoice_method" name="Metodos de Facturación" parent="sale_invoice_method_menu" action="sale_invoice_method_action" sequence="5" groups="stock_extended.market_place_group_manager"/>
+    
+</odoo>

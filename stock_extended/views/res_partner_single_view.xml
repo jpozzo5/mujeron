@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<odoo>
+        <record id="res_partner_single_pivot" model="ir.ui.view">
+            <field name="name">res.partner.single.pivot</field>
+            <field name="model">res.partner.single</field>
+            <field name="arch" type="xml">
+                <pivot string="Cliente Final">
+                    <field name="name"/>
+                    <field name="create_date" type="measure"/>
+                </pivot>
+            </field>
+        </record>
+
+        <record id="res_partner_single_search" model="ir.ui.view">
+            <field name="name">res.partner.single.search</field>
+            <field name="model">res.partner.single</field>
+            <field name="arch" type="xml">
+              <search>
+              	<field name="name"/>
+              </search>
+            </field>
+        </record>
+
+        <record id="res_partner_single_tree" model="ir.ui.view">
+            <field name="name">res.partner.single.tree</field>
+            <field name="model">res.partner.single</field>
+            <field name="arch" type="xml">
+                <tree string="Cliente Final">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="res_partner_single_form" model="ir.ui.view">
+            <field name="name">res.partner.single.form</field>
+            <field name="model">res.partner.single</field>
+            <field name="arch" type="xml">
+                <form string="Cliente Final">
+                    <!--<header>
+                        <button
+                            string="Confirm"
+                            type="object"
+                            name="action_confirm"
+                            class="oe_highlight"
+                            attrs="{'invisible':[('state','=','cancel')]}"/>
+                        <button
+                            string="Cancel"
+                            type="object"
+                            name="action_cancel"
+                            attrs="{'invisible':[('state','=','cancel')]}"/>
+                        <field name="state" widget="statusbar" options="{'clickable': '1', 'fold_field': 'fold'}" statusbar_visible="Abierto,Cerrado"/>
+
+                    </header>-->
+                    <sheet>
+		                    <div class="oe_button_box" name="button_box">
+                            <button name="toggle_active" invisible="0" type="object" class="oe_stat_button" icon="fa-archive">
+                                <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
+                            </button>
+                        </div>
+                        <div class="oe_title">
+                            <label for="name" class="" string="Nombre del Cliente Final" />
+                            <h1>
+                                <field name="name" readonly="False" />
+                            </h1>
+                        </div>
+                        
+                    </sheet>
+                    <!--<div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>-->
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="res_partner_single_action">
+            <field name="name">Cliente Final</field>
+            <field name="res_model">res.partner.single</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record model="ir.actions.act_window" id="res_partner_single_action_graph">
+            <field name="name">Cliente Final</field>
+            <field name="res_model">res.partner.single</field>
+            <field name="view_mode">pivot</field>
+        </record>
+
+        <menuitem id="res_partner_single_menu" name="Clientes Finales" parent="menu_root" sequence="5"/>
+        <menuitem id="res_partner_single" name="Clientes Finales" parent="res_partner_single_menu" action="res_partner_single_action" sequence="5"/>
+    
+</odoo>

@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<odoo>
+
+    
+    
+    
+    <record id="product_normal_form_view_inherit" model="ir.ui.view">
+        <field name="name">product.product.form.inherit</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_normal_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='sales']" position="after">
+                <page name="market_place" string="Market Place" attrs="{'invisible': [('sale_ok','=',False)]}">
+                    <group name="market_place">
+                        
+                            <field name="product_sku_ids">
+                                <tree editable="bottom">
+                                    <field name="company_id"/>
+                                    <field name="market_place_id"/>
+                                    <field name="sku"/>
+                                </tree>
+                            </field>
+           
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+    
+    
+</odoo>

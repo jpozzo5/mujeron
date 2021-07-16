@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_sale_market_place,access.sale.market.place,model_sale_market_place,base.group_user,1,1,1,1
+access_sale_type,access.sale.type,model_sale_type,base.group_user,1,1,1,1
+access_sale_invoice_method,access.sale.invoice.method,model_sale_invoice_method,base.group_user,1,1,1,1
+access_sale_market_place_commission,access.sale.market.place.commission,model_sale_market_place_commission,base.group_user,1,1,1,1
+access_res_partner_single,access.res.partner.single,model_res_partner_single,base.group_user,1,1,1,1
+access_product_product_market_place,access.product.product.market.place,model_product_product_market_place,base.group_user,1,1,1,1
+access_report_market_place,access.report.market.place,model_report_market_place,base.group_user,1,1,1,1
