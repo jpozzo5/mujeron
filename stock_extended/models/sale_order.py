@@ -32,34 +32,37 @@ class SaleOrder(models.Model):
         list_ctl = []
         if 'order_line' in values and values['order_line']:
             for line in values['order_line']:
-                line_obj = self.env['sale.order.line'].search([
-                    ('service_order', '=', str(line[2]['service_order'])),('order_id', '!=', res.id)
-                ], limit=1)
-                if line_obj:
-                    raise ValidationError(
-                        'La Order de Servicio %s no puede estar repetida. Ya se encuentra registrada en la orden %s' % (line[2]['service_order'], line_obj.order_id.name))
-                if line[2]['service_order'] not in list_ctl:
-                    list_ctl.append(line[2]['service_order'])
-                else:
-                    raise ValidationError(
-                        'La Order de Servicio %s no puede estar repetida. Ya se encuentra registrada en esta misma orden' % (line[2]['service_order']))
+                if 'service_order' in line[2] and line[2]['service_order'] and res.id:
+                    line_obj = self.env['sale.order.line'].search([
+                        ('service_order', '=', str(line[2]['service_order'])),
+                        ('order_id', '!=', res.id)
+                    ], limit=1)
+                    if line_obj:
+                        raise ValidationError(
+                            'La Order de Servicio %s no puede estar repetida. Ya se encuentra registrada en la orden %s' % (line[2]['service_order'], line_obj.order_id.name))
+                    if line[2]['service_order'] not in list_ctl:
+                        list_ctl.append(line[2]['service_order'])
+                    else:
+                        raise ValidationError(
+                            'La Order de Servicio %s no puede estar repetida. Ya se encuentra registrada en esta misma orden' % (line[2]['service_order']))
         return res
     
 
     def write(self, values):
         res = super(SaleOrder, self).write(values)
         list_ctl = []
-        for line in self.order_line.mapped('service_order'):
+        for line in self.order_line.filtered(lambda x: x.service_order).mapped('service_order'):
             line_obj = self.env['sale.order.line'].search([
                 ('service_order', '=', line),('order_id', '!=', self.id)
-            ])
+            ], limit=1)
             if line_obj:
                 raise ValidationError(
-                        'La Order de Servicio %s no puede estar repetida. Ya se encuentra registrada en la orden %s' % (line, line_obj.order_id.name))
+                    'La Order de Servicio %s no puede estar repetida. Ya se encuentra registrada2 en la orden %s' % (line, line_obj.order_id.name))
             if line not in list_ctl:
                 list_ctl.append(line)
             else:
-                raise ValidationError('La Order de Servicio %s no puede estar repetida' % (line))
+                raise ValidationError(
+                    'La Order de Servicio %s no puede estar repetida. Ya se encuentra registrada en esta misma orden' % (line))
         return res
     
     
