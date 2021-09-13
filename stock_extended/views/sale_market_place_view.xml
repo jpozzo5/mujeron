@@ -64,11 +64,11 @@
                                 <field name="name" readonly="False" />
                             </h1>
                         </div>
-                        
+
                         <group>
                             <field name="partner_id" readonly="False" />
                         </group>
-                        
+
                     </sheet>
                     <!--<div class="oe_chatter">
                         <field name="message_follower_ids" widget="mail_followers"/>
@@ -93,5 +93,5 @@
         <menuitem id="menu_root" name="Market Place" sequence="10" groups="stock_extended.market_place_group_manager"/>
         <menuitem id="sale_market_place_menu" name="Market Place" parent="menu_root" sequence="5" groups="stock_extended.market_place_group_manager"/>
         <menuitem id="sale_market_place" name="Market Place" parent="sale_market_place_menu" action="sale_market_place_action" sequence="5" groups="stock_extended.market_place_group_manager"/>
-    
+
 </odoo>

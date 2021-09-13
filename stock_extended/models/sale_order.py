@@ -14,8 +14,8 @@ class SaleOrder(models.Model):
     partner_single_ok = fields.Boolean(string='Cliente Final de Contactos')
     service_order_all = fields.Char('Ordenes de Servicio', compute="_compute_service_order_all", store=True)
     partner_marketplace_ok = fields.Boolean(string='Es Cliente Marketplace?', compute="_compute_partner_marketplace_ok")
-    
-    
+
+
     @api.onchange('partner_id')
     def _compute_partner_marketplace_ok(self):
         for rec in self:
@@ -23,9 +23,9 @@ class SaleOrder(models.Model):
             partner_obj = self.env['sale.market.place'].search([('partner_id', '=', rec.partner_id.id)])
             if partner_obj:
                 rec.partner_marketplace_ok = True
-        
-        
-    
+
+
+
     @api.depends('order_line')
     def _compute_service_order_all(self):
         for rec in self:
@@ -37,7 +37,7 @@ class SaleOrder(models.Model):
                     seq.append(line)
             if seq:
                 rec.service_order_all = str.join( seq )
-    
+
     @api.model
     def create(self, values):
         res = super(SaleOrder, self).create(values)
@@ -58,7 +58,7 @@ class SaleOrder(models.Model):
                         raise ValidationError(
                             'La Order de Servicio %s no puede estar repetida. Ya se encuentra registrada en esta misma orden' % (line[2]['service_order']))
         return res
-    
+
 
     def write(self, values):
         res = super(SaleOrder, self).write(values)
@@ -76,9 +76,9 @@ class SaleOrder(models.Model):
                 raise ValidationError(
                     'La Order de Servicio %s no puede estar repetida. Ya se encuentra registrada en esta misma orden' % (line))
         return res
-    
-    
-    
+
+
+
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
 
@@ -88,7 +88,7 @@ class SaleOrderLine(models.Model):
     partner_single_ok = fields.Boolean(related='order_id.partner_single_ok', string='Cliente Final de Contactos',readonly=True)
     partner_marketplace_ok = fields.Boolean(related='order_id.partner_marketplace_ok', string='Es Cliente Marketplace?',readonly=True)
     order_final_partner_raw = fields.Char('Cliente Final', compute="_compute_order_final_partner_raw", store=True)
-    
+
     @api.depends('order_final_single_partner', 'order_final_partner_id', 'partner_single_ok')
     def _compute_order_final_partner_raw(self):
         for rec in self:
@@ -96,7 +96,3 @@ class SaleOrderLine(models.Model):
                 rec.order_final_partner_raw = rec.order_final_partner_id.name
             else:
                 rec.order_final_partner_raw = rec.order_final_single_partner
-        
-    
-        
-    

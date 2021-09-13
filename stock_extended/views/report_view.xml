@@ -26,7 +26,7 @@
                 </tree>
             </field>
         </record>
-        
+
         <record id="market_place_report_view_search" model="ir.ui.view">
             <field name="name">market_place.report.view.search</field>
             <field name="model">report.market.place</field>
@@ -42,7 +42,7 @@
               </search>
             </field>
         </record>
-        
+
         <record model="ir.actions.act_window" id="action_report_market_place_tree">
             <field name="name">Market Place Report</field>
             <field name="res_model">report.market.place</field>

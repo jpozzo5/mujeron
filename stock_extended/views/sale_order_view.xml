@@ -8,22 +8,22 @@
             <field name="arch" type="xml">
                 <field name="date_order" position="after">
                     <field name="sale_type_id" options="{'no_create': True, 'no_open': True}" groups="stock_extended.market_place_group_manager"/>
-                    
+
                     <field name="partner_marketplace_ok" invisible="1"/>
-                    <field name="partner_single_ok" 
-                           attrs="{'invisible': [('partner_marketplace_ok', '=', False)]}" 
+                    <field name="partner_single_ok"
+                           attrs="{'invisible': [('partner_marketplace_ok', '=', False)]}"
                            groups="stock_extended.market_place_group_manager"/>
                 </field>
-                
+
                 <xpath expr="//page/field[@name='order_line']/tree/field[@name='qty_delivered']" position="after">
                     <field name="partner_single_ok" invisible="1"/>
                     <field name="partner_marketplace_ok" invisible="1"/>
                     <field name="service_order"/>
-                    <field name="order_final_single_partner" 
-                           attrs="{'invisible': ['|', ('partner_single_ok', '=', True),('parent.partner_marketplace_ok', '=', False)]}" 
+                    <field name="order_final_single_partner"
+                           attrs="{'invisible': ['|', ('partner_single_ok', '=', True),('parent.partner_marketplace_ok', '=', False)]}"
                            groups="stock_extended.market_place_group_manager"/>
-                    <field name="order_final_partner_id" 
-                           attrs="{'invisible': ['|', ('partner_single_ok', '=', False),('parent.partner_marketplace_ok', '=', False)]}" 
+                    <field name="order_final_partner_id"
+                           attrs="{'invisible': ['|', ('partner_single_ok', '=', False),('parent.partner_marketplace_ok', '=', False)]}"
                            groups="stock_extended.market_place_group_manager"/>
                 </xpath>
             </field>

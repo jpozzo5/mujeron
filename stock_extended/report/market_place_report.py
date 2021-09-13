@@ -7,12 +7,12 @@ from odoo.tools import date_utils
 
 _logger = logging.getLogger(__name__)
 
-    
+
 class MarketPlaceReportLine(models.Model):
     _name = 'report.market.place'
     _auto = False
     _description = 'This is the lines in the market place report'
-    
+
 
     product_id = fields.Many2one('product.product','Product',readonly=True)
     company_id = fields.Many2one('res.company','Compañía',readonly=True)
@@ -31,14 +31,14 @@ class MarketPlaceReportLine(models.Model):
     order_final_partner_raw = fields.Char('Cliente Final')
     market_place_id = fields.Many2one('sale.market.place', 'Market Place')
     sku = fields.Char('SKU Market Place')
-    
-    
+
+
     def init(self):
         tools.drop_view_if_exists(self._cr, 'report_market_place')
         query = """
         CREATE or REPLACE VIEW report_market_place AS(
-        
-        select 
+
+        select
         row_number() OVER (ORDER BY sol.id) as id,
         so.company_id as company_id,
         sol.product_id as product_id,
