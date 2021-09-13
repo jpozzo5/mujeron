@@ -28,6 +28,7 @@ class MarketPlaceReportLine(models.Model):
     date_order = fields.Datetime('Fecha del Pedido')
     currency_id = fields.Many2one('res.currency', 'Moneda')
     partner_id = fields.Many2one('res.partner', 'Cliente Odoo')
+    order_final_partner_raw = fields.Char('Cliente Final')
     market_place_id = fields.Many2one('sale.market.place', 'Market Place')
     sku = fields.Char('SKU Market Place')
     
@@ -54,7 +55,8 @@ class MarketPlaceReportLine(models.Model):
         so.partner_id,
         so.currency_id,
         so.sale_type_id as sale_type_id,
-        ppmp.sku
+        ppmp.sku,
+        sol.order_final_partner_raw
         from sale_order_line sol
         left join sale_order so on so.id = sol.order_id
         left join product_product pro on pro.id = sol.product_id
